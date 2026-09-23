@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Undelete: Recycle Bin for Jira - Documentation</title><link rel="stylesheet" href="../style.css"><link rel="icon" href="../logo-occoy-512.png"></head>
+<body>
+<header><div class="wrap bar"><img src="../logo-occoy-512.png" alt=""><b>Occoy</b>
+<nav><a href="../undelete/">Undelete</a><a href="../undelete/privacy.html">Privacy</a><a href="mailto:undeleted.support@gmail.com">Support</a></nav></div></header>
+<section class="hero"><div class="wrap"><img src="../logo-undelete-512.png" alt=""><div><h1>Undelete: Recycle Bin for Jira</h1><p>Jira has no undo for deleted issues. Undelete adds one.</p></div></div></section>
+<main><div class="wrap">
+<img class="shot" src="screenshot.png" alt="Undelete recycle bin in Jira">
+<h2>Getting started</h2>
+<ol><li>Install <b>Undelete</b> from the Atlassian Marketplace.</li>
+<li>Protection starts immediately. Undelete scans all existing issues in the background; the status banner shows progress.</li>
+<li>Open <b>Jira Settings (&#9881;) &rarr; Apps &rarr; Undelete - Recycle Bin</b>. You need to be a Jira administrator.</li></ol>
+<h2>Restoring a deleted issue</h2>
+<ol><li>Open the <b>Recycle bin</b> tab. Filter by project or search by key or summary.</li>
+<li>Click an issue's summary to preview it: fields, description, comments, worklogs and links.</li>
+<li>Click <b>Restore</b>, or tick several issues and click <b>Restore selected</b>.</li>
+<li>Restored issues appear in the <b>Restored</b> tab with a link to the new issue.</li></ol>
+<p><b>What is restored:</b> summary, description, issue type, status (when reachable in one transition), labels, priority, assignee, reporter, components, versions, due date, sprint, custom fields available on the create screen, estimates, comments (with the original author and date), worklogs (optional), issue links, epic/parent and sub-tasks. Restoring a parent automatically restores the sub-tasks that were deleted with it.</p>
+<h3>What can't be restored</h3>
+<ul><li><b>The original issue key.</b> Jira assigns a new key; the original key is recorded in an audit comment on the restored issue.</li>
+<li><b>Attachment files.</b> Jira deletes them together with the issue. Their names are listed on the restored issue.</li>
+<li>Field values Jira refuses on creation (e.g. archived versions, deactivated users). These are listed in the restore notes.</li>
+<li>Issues deleted <b>before</b> Undelete was installed.</li></ul>
+<h3>Notifications</h3>
+<p>Restoring an issue creates a new Jira issue and adds its comments, so Jira sends its normal notifications (for example to the reporter, assignee and watchers). Undelete never @mentions people when restoring comments, so restoring doesn't ping everyone who was mentioned originally.</p>
+<h2>Settings</h2>
+<ul><li><b>Projects NOT protected:</b> issues in these projects are not captured.</li>
+<li><b>Keep deleted issues for (days):</b> older records are erased automatically (default 365, range 7-3650).</li>
+<li><b>Restore worklogs:</b> turn off if logged time should not be re-created.</li>
+<li><b>Re-scan all issues now:</b> captures any issue that is not protected yet (normally not needed).</li></ul>
+<h2>Deleting permanently</h2>
+<p>Tick items in the recycle bin and click <b>Delete permanently</b> to erase their stored copies immediately, for example to honour a data-deletion request.</p>
+<h2>Security and data</h2>
+<p>Undelete is built on Atlassian Forge and <b>runs on Atlassian</b>: all data stays in Atlassian's cloud, with no external servers. Only Jira administrators can view or restore deleted issues. See the <a href="privacy.html">privacy policy</a>.</p>
+<h2>Limits</h2>
+<p>Undelete runs on Atlassian Forge and is subject to Forge platform quotas and Jira rate limits. Very large issues (thousands of comments) keep their most recent comments and worklogs. Changes to issue links may take a few minutes to be captured.</p>
+<h2>Support</h2>
+<p>Email <a href="mailto:undeleted.support@gmail.com">undeleted.support@gmail.com</a>. We reply within one business day, and within 24 hours for critical issues.</p>
+</div></main>
+<footer><div class="wrap"><span>&copy; 2026 Occoy</span><a href="../undelete/privacy.html">Privacy policy</a><a href="mailto:undeleted.support@gmail.com">undeleted.support@gmail.com</a></div></footer>
+</body></html>
