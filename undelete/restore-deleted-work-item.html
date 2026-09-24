@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to restore a deleted work item (issue) in Jira Cloud - 2026 guide</title><meta name="description" content="Jira Cloud has no undo for deleted work items (issues). What you can still recover (audit log, notifications, backups), how to prevent deletions, and how a recycle bin works."><link rel="stylesheet" href="../style.css"><link rel="icon" href="../logo-occoy-512.png"></head>
+<body>
+<header><div class="wrap bar"><img src="../logo-occoy-512.png" alt=""><b>Occoy</b>
+<nav><a href="../undelete/">Undelete</a><a href="../undelete/privacy.html">Privacy</a><a href="mailto:undelete.support@gmail.com">Support</a></nav></div></header>
+
+<main><div class="wrap">
+<h2>How to restore a deleted work item in Jira Cloud</h2>
+<p><i>Updated 24 September 2026. Applies to Jira Cloud (Jira, Jira Service Management, Jira Work Management). Jira calls issues "work items" since 2025; everything here applies to both names.</i></p>
+
+<h3>The short answer</h3>
+<p><b>Jira Cloud has no recycle bin and no undo for deleted work items.</b> When a work item is deleted, it is gone together with its comments, worklogs, attachments and history. Atlassian Support can't bring back a single work item. The request for a native recycle bin (<a href="https://jira.atlassian.com/browse/JRACLOUD-36415">JRACLOUD-36415</a>) is one of the most-voted Jira Cloud requests and is still open.</p>
+<p>Deleting a whole <i>project</i> is different: deleted projects go to Jira's own trash for 60 days and can be restored from <i>Settings &gt; Projects &gt; Trash</i>.</p>
+
+<h3>What you can do right now</h3>
+<ol>
+<li><b>Find out what was deleted, by whom and when.</b> Open <i>Settings &gt; System &gt; Audit log</i> and filter for deleted work items. The audit log records the key and the user, but not the content.</li>
+<li><b>Recover the content from notifications.</b> Jira emails (creation, comments, updates) often still contain the summary, description and comments. Search your mailbox, and ask the reporter and watchers to search theirs.</li>
+<li><b>Check exports and integrations.</b> Filters exported to CSV, Confluence pages with Jira macros, Slack/Teams notifications, or a BI/data warehouse sync may hold a copy.</li>
+<li><b>Check your backups.</b> If your organisation uses Atlassian Backup and Restore or a third-party backup tool, you may be able to recover the data from there. A full site restore overwrites everything else, so it's rarely an option for a single work item. Export the data and re-create the work item by hand.</li>
+<li><b>Re-create it manually</b> from what you found, and link to the old key in a comment so people can find it.</li>
+</ol>
+
+<h3>How to make sure it doesn't happen again</h3>
+<ul>
+<li><b>Restrict the "Delete work items" permission.</b> In each permission scheme (<i>Settings &gt; Work items &gt; Permission schemes</i>), give it to administrators only instead of broad groups or roles. This is the single most effective step.</li>
+<li><b>Close instead of deleting.</b> Add a "Cancelled" or "Won't do" resolution so people have a better option than deleting.</li>
+<li><b>Watch the audit log</b> regularly for mass deletions.</li>
+<li><b>Install a recycle bin app before you need it.</b> Apps can only protect work items that are deleted <i>after</i> they are installed, because they need a copy of the data beforehand.</li>
+</ul>
+
+<h3>A recycle bin for Jira</h3>
+<p><i>Disclosure: we build this app.</i> <a href="./">Undelete</a> adds a recycle bin to Jira Cloud. It keeps a copy of every work item. When one is deleted, it's listed with who deleted it and when, and a Jira administrator can restore it with its fields, status, comments (original author and date), worklogs, links and sub-tasks. It runs entirely on Atlassian's infrastructure (Forge, "Runs on Atlassian"), so no data leaves Atlassian. Like any such app, it can't bring back work items deleted before it was installed. See the <a href="./">documentation</a> for what it restores and its limits.</p>
+</div></main>
+<footer><div class="wrap"><span>&copy; 2026 Occoy</span><a href="../undelete/privacy.html">Privacy policy</a><a href="mailto:undelete.support@gmail.com">undelete.support@gmail.com</a></div></footer>
+</body></html>
