@@ -21,7 +21,11 @@
 <ul><li><b>The original issue key.</b> Jira assigns a new key; the original key is recorded in an audit comment on the restored issue.</li>
 <li><b>Attachment files.</b> Jira deletes them together with the issue. Their names are listed on the restored issue.</li>
 <li>Field values Jira refuses on creation (e.g. archived versions, deactivated users). These are listed in the restore notes.</li>
-<li>Issues deleted <b>before</b> Undelete was installed.</li></ul>
+<li>Issues deleted <b>before</b> Undelete was installed.</li>
+<li>Watchers, votes, change history and board rank (Jira doesn't allow apps to recreate them).</li>
+<li>Issues hidden from the app by an issue security level are not captured.</li>
+<li>Deleting a whole <b>project</b> is handled by Jira's own project trash (restorable for 60 days in Jira itself).</li></ul>
+<p>Good to know: restoring an epic re-links the child issues Jira left without a parent, and restoring a parent brings back the sub-tasks deleted with it. Edits made seconds before a deletion are kept, because the latest summary, status and type are taken from the deletion itself.</p>
 <h3>Notifications</h3>
 <p>Restoring an issue creates a new Jira issue and adds its comments, so Jira sends its normal notifications (for example to the reporter, assignee and watchers). Undelete never @mentions people when restoring comments, so restoring doesn't ping everyone who was mentioned originally.</p>
 <h2>Settings</h2>
