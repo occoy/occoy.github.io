@@ -3,56 +3,65 @@
 <title>Undelete: Recycle Bin for Jira - Documentation</title><link rel="stylesheet" href="../style.css"><link rel="icon" href="../logo-occoy-512.png"></head>
 <body>
 <header><div class="wrap bar"><img src="../logo-occoy-512.png" alt=""><b>Occoy</b>
-<nav><a href="../undelete/">Undelete</a><a href="../undelete/privacy.html">Privacy</a><a href="mailto:support@occoy.com">Support</a></nav></div></header>
+<nav><a href="../undelete/">Undelete</a><a href="../undelete/faq.html">FAQ</a><a href="../undelete/privacy.html">Privacy</a><a href="mailto:support@occoy.com">Support</a></nav></div></header>
 <section class="hero"><div class="wrap"><img src="../logo-undelete-512.png" alt=""><div><h1>Undelete: Recycle Bin for Jira</h1><p>Jira has no undo for deletions. Undelete adds one: work items, comments, worklogs and files.</p></div></div></section>
 <main><div class="wrap">
 <img class="shot" src="screenshot.png" alt="Undelete recycle bin in Jira">
-<p>Lost a work item already? Read <a href="restore-deleted-work-item.html">how to restore a deleted work item in Jira Cloud</a> (what you can still recover without any app).</p>
+<p>Lost a work item already? Read <a href="restore-deleted-work-item.html">how to restore a deleted work item in Jira Cloud</a> (what you can still recover without any app). Questions? See the <a href="faq.html">FAQ</a>.</p>
+<div class="box"><h2>At a glance: what to know before you rely on it</h2>
+<ul><li><b>Only deletions made after you install Undelete can be restored.</b> Jira keeps no copy of a deleted work item, so no app can bring back one deleted before it was installed.</li>
+<li><b>A restored work item gets a new key</b> (Jira never reuses keys). The <b>Restored</b> tab shows the old and new keys, and a comment on the restored work item names the original key.</li>
+<li><b>Attachment files up to 50 MB</b> come back with the work item. Bigger files, and files deleted before their backup finished, can't be restored; their names are listed on the restored work item.</li>
+<li><b>Restored comments and worklogs show Undelete as their author</b> (Jira doesn't let apps post as someone else). Each one starts with a line naming the original author and date.</li>
+<li><b>Watchers, votes, change history and board rank</b> can't be re-created. The status is restored when Jira's workflow allows it in one step.</li>
+<li><b>Free for sites with up to 10 users</b>; larger sites have a 30-day free trial, then a per-user subscription billed by Atlassian. If the subscription ends, deletions are still recorded, but restoring is paused until it is active again.</li></ul></div>
 <h2>Getting started</h2>
-<ol><li>Install <b>Undelete</b> from the Atlassian Marketplace.</li>
-<li>Protection starts immediately. Undelete scans all existing work items in the background and backs up their attachment files; the status banner shows progress.</li>
+<ol><li>Install <b>Undelete</b> from the Atlassian Marketplace. There is nothing to configure.</li>
+<li>Protection starts immediately for work items created or changed from now on. A first scan copies all existing work items in the background and backs up their attachment files; the status banner shows its progress. A work item deleted before the scan reached it is still listed, with basic data only.</li>
 <li>Open <b>Jira Settings (&#9881;) &rarr; Apps &rarr; Undelete - Recycle Bin</b>. You need to be a Jira administrator.</li></ol>
 <h2>Restoring a deleted work item</h2>
-<ol><li>Open the <b>Recycle bin</b> tab. Filter by project or search by key or summary.</li>
-<li>Click a work item's summary to preview it: fields, description, comments, worklogs and links.</li>
-<li>Click <b>Restore</b>, or tick several work items and click <b>Restore selected</b>.</li>
-<li>Restored work items appear in the <b>Restored</b> tab with a link to the new work item.</li></ol>
-<p><b>What is restored:</b> attachment files (up to 50 MB each), summary, description, work type, status (when reachable in one transition), labels, priority, assignee, reporter, components, versions, due date, sprint, custom fields available on the create screen, estimates, comments (with the original author and date), worklogs (optional), links, epic/parent and sub-tasks. Restoring a parent automatically restores the sub-tasks that were deleted with it.</p>
+<ol><li>Open the <b>Recycle bin</b> tab. Filter by project, or search by key or words from the summary (the search covers the whole recycle bin; a sub-task is also found by its parent's key).</li>
+<li>Click a work item's summary to preview it: fields, description, comments, worklogs, links and attachments.</li>
+<li>Click <b>Restore</b>, or tick several work items and click <b>Restore selected</b>. Restores run in the background; you can leave the page.</li>
+<li>Restored work items appear in the <b>Restored</b> tab with the original key, the new key, who restored them and notes on anything that couldn't be restored.</li></ol>
+<p><b>What is restored:</b> summary, description, work type, status (when reachable in one transition), labels, priority, assignee, reporter, components, versions, due date, sprint (if still open), team, custom fields available on the create screen, estimates, comments (with the original author and date, and their visibility), worklogs (optional), links, epic/parent, sub-tasks, attachment files (up to 50 MB each) and, on Jira Service Management, the request type. Restoring a parent automatically restores the sub-tasks that were deleted with it; restoring an epic links its child work items to it again.</p>
 <h3>What can't be restored</h3>
-<ul><li><b>The original key.</b> Jira assigns a new key; the original key is recorded in an audit comment on the restored work item.</li>
-<li><b>Attachment files larger than 50 MB</b>, or files the initial scan hadn't backed up yet when the work item was deleted. Their names are listed on the restored work item.</li>
-<li><b>Inline images at their original place.</b> Backed-up images come back as attachments; the description shows a marker where they were embedded.</li>
+<ul><li><b>The original key.</b> Jira assigns a new key; the original key is recorded in a comment on the restored work item, so searching Jira for <code>text ~ "PROJ-123"</code> finds it. Links to the old key (in Confluence, chat or email) don't redirect.</li>
+<li><b>Attachment files larger than 50 MB</b>, or files that had not been backed up yet when the work item was deleted. Their names are listed on the restored work item.</li>
+<li><b>Inline images at their original place.</b> Backed-up images come back as attachments; the text shows a marker where they were embedded.</li>
+<li><b>The original author on comments and worklogs.</b> Jira shows Undelete as the author; the original author and date are written at the top of each one. Time reports therefore count restored worklogs under Undelete (turn off "Restore worklogs" in Settings if you prefer).</li>
+<li><b>The original created date.</b> It is written in the restore comment.</li>
 <li>Field values Jira refuses on creation (e.g. archived versions, deactivated users). These are listed in the restore notes.</li>
 <li>Work items deleted <b>before</b> Undelete was installed.</li>
-<li>Watchers, votes, change history and board rank (Jira doesn't allow apps to recreate them).</li>
+<li>Watchers, votes, change history and board rank (Jira doesn't allow apps to re-create them).</li>
 <li>Work items hidden from the app by an issue security level are not captured.</li>
 <li>Deleting a whole <b>project</b> is handled by Jira's own project trash (restorable for 60 days in Jira itself).</li></ul>
-<p>Good to know: restoring an epic re-links the child work items Jira left without a parent, and restoring a parent brings back the sub-tasks deleted with it. Edits made seconds before a deletion are kept, because the latest summary, status and type are taken from the deletion itself.</p>
-<h3>Notifications</h3>
-<p>Restoring a work item creates a new Jira work item and adds its comments, so Jira sends its normal notifications (for example to the reporter, assignee and watchers). Undelete never @mentions people when restoring comments, so restoring doesn't ping everyone who was mentioned originally.</p>
+<p>Good to know: edits made seconds before a deletion are kept, because the latest summary, status and type are taken from the deletion itself. A sub-task can only be restored together with (or after) its parent; if the parent is gone for good, the sub-task is restored as a Task.</p>
+<h3>Notifications and automation</h3>
+<p>Restoring creates a new Jira work item and adds its comments, so Jira sends its usual notifications (for example to the assignee and watchers), and Jira Automation rules that react to new work items or comments run as usual. Undelete never re-sends @mentions. On Jira Service Management, the customer and request participants are added back only after the comments, without notification, so customers don't get an email for every old comment.</p>
 <h2>Restoring a deleted comment, worklog or attachment</h2>
 <p>Jira has no undo for a deleted comment, worklog or attachment either. Undelete keeps them too.</p>
 <ol><li>Open the <b>Comments, worklogs &amp; files</b> tab. Each row shows the work item, the text (or logged time, or file name), the author, who deleted it and when.</li>
 <li>Click the text to read the full comment, then <b>Restore</b>, or tick several rows and click <b>Restore selected</b>.</li>
 <li>The item is added back to the work item. Comments and worklogs get a line naming the original author and date. Comment visibility (role/group restrictions, and internal vs. customer-visible on Jira Service Management) is kept; worklogs keep their original date and time spent.</li></ol>
-<p>If the work item itself was deleted since, restore it from the Recycle bin first; the comment then goes to the restored copy.</p>
+<p>If the work item itself was deleted since, restore it from the Recycle bin first; the comment then goes to the restored copy. Deleted attachments are listed only if their file had been backed up.</p>
 <h2>Project administrators</h2>
 <p>A Jira administrator can turn on <b>Let project administrators restore their own project's deleted items</b> in Settings. Project administrators then find <b>Undelete - Recycle Bin</b> under <b>Project settings &rarr; Apps</b>, showing only that project's deleted work items, comments, worklogs and files. They can preview and restore; permanent deletion and settings stay with Jira administrators.</p>
 <h2>Who deleted what</h2>
-<p>The <b>Who deleted what</b> tab counts, per person, the work items, comments, worklogs and files deleted in the last 7, 30 or 90 days (restored items included). On the project page it covers that project only.</p>
+<p>The <b>Who deleted what</b> tab counts, per person, the work items, comments, worklogs and files deleted in the last 7, 30 or 90 days (restored items included). On the project page it covers that project only. Deletions made by a Jira Automation rule show the rule's actor.</p>
 <h2>Settings</h2>
-<ul><li><b>Projects NOT protected:</b> work items in these projects are not captured.</li>
-<li><b>Keep deleted items for (days):</b> older records are erased automatically (default 365, range 7-3650).</li>
+<ul><li><b>Projects NOT protected:</b> deletions in these projects are not recorded. Saving erases the copies kept of their work items; what is already in the recycle bin stays.</li>
+<li><b>Keep deleted items for (days):</b> from 7 to 3650 (default 365). A daily cleanup erases older deleted items for good, so lowering the number erases them at the next cleanup.</li>
 <li><b>Let project administrators restore their own project's deleted items:</b> off by default (see above).</li>
-<li><b>Back up attachment files:</b> on by default. Files up to 50 MB are copied to Atlassian-hosted storage when they are attached; existing files are copied by the initial scan (or by "Re-scan all work items now" if you turn backup on later).</li>
+<li><b>Back up attachment files:</b> on by default. Files up to 50 MB are copied to Atlassian-hosted storage when they are attached; existing files are copied by the first scan (or by "Re-scan all work items now" if you turn backup on later).</li>
 <li><b>Restore worklogs:</b> turn off if logged time should not be re-created.</li>
 <li><b>Re-scan all work items now:</b> captures any work item that is not protected yet (normally not needed).</li></ul>
 <h2>Deleting permanently</h2>
-<p>Tick items and click <b>Delete permanently</b> to erase their stored copies (including file copies) immediately, for example to honour a data-deletion request.</p>
+<p>Tick items and click <b>Delete permanently</b> to erase their stored copies (including file copies) immediately, for example to honour a data-deletion request. Sub-tasks deleted together with a work item are erased with it. This can't be undone.</p>
 <h2>Security and data</h2>
-<p>Undelete is built on Atlassian Forge and <b>runs on Atlassian</b>: all data, including attachment file copies, stays in Atlassian's cloud, with no external servers. Only Jira administrators, and project administrators for their own projects if a Jira administrator allows it, can view or restore deleted items. See the <a href="privacy.html">privacy policy</a>.</p>
+<p>Undelete is built on Atlassian Forge and <b>runs on Atlassian</b>: all data, including attachment file copies, stays in Atlassian's cloud, with no external servers. Only Jira administrators, and project administrators for their own projects if a Jira administrator allows it, can view or restore deleted items. Uninstalling the app erases its stored data. See the <a href="privacy.html">privacy policy</a>.</p>
 <h2>Limits</h2>
-<p>Undelete runs on Atlassian Forge and is subject to Forge platform quotas and Jira rate limits. Very large work items (thousands of comments) keep their most recent comments and worklogs. Changes to links may take a few minutes to be captured.</p>
+<p>Undelete runs on Atlassian Forge and is subject to Forge platform quotas and Jira rate limits. Very large work items (thousands of comments) keep their most recent comments and worklogs. Changes to links may take a few minutes to be captured. Undelete keeps the latest version of each work item, not a history of edits: it brings back deleted things, it doesn't undo changes.</p>
 <h2>Support</h2>
 <p>Email <a href="mailto:support@occoy.com">support@occoy.com</a>. Support hours: Monday to Friday, 9:00 to 18:00 Italian time.</p>
 </div></main>
